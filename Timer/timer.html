@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora e Data em Tempo Real</title>
+    <!--Link bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .top-bar {
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .time-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!--Barra superior com data e hora-->
+    <div class="container-fluid top-bar">
+<div class="row">
+    <div class="col text-end time-date" id="timeDate">
+        </div>
+    </div>
+</div>
+
+<!-- Conteúdo principal da página-->
+ <div class="container">
+    <h1>Bem-vindo à página!</h1>
+    <p>Essa página exibe a hora e data em tempo real no topo.</p>
+ </div>
+
+ <!--Script para atualizar a hora e data-->
+ <script>
+    function updateDataTime() {
+        const now = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+    };
+    const formatteDate = now.toLocaleString('pt-BR', options);
+    document.getElementById('timeDate').textContent = formatteDate;
+    }
+
+    // Atualiza a hora certa a cada segundo
+    setInterval(updateDataTime, 1000);
+
+    //Atualiza a hora imediatamente ao carregar
+    updateDataTime();
+     </script>
+
+     <!--Script do Bootstrap-->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
