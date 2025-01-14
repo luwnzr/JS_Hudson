@@ -1,11 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
 
-// Middleware para interpretar JSON
-app.use(bodyParser.json());
+// Middleware para interpretar JSON (não precisa do body-parser separado)
+app.use(express.json());
 
 // Base de dados fictícia
 let items = [];
@@ -38,7 +37,24 @@ app.get('/items/:id', (req, res) => {
     res.status(200).json(item);
 });
 
+// Atualizar um item por ID (Update)
+app.put('/items/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, description } = req.body;
+    const itemIndex = items.findIndex(i => i.id === parseInt(id));
+    
+    if (itemIndex === -1) {
+        return res.status(404).json({ error: 'Item not found.' });
+    }
+    if (!name || !description) {
+        return res.status(400).json({ error: 'Name and description are required.' });
+    }
+    
+    items[itemIndex] = { id: parseInt(id), name, description };
+    res.status(200).json(items[itemIndex]);
+});
+
 // Iniciar o servidor
 app.listen(port, () => {
-    console.log (API rodando em http://localhost:${port})
+    console.log(`API rodando em http://localhost:${port}`);
 });
