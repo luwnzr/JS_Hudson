@@ -1,0 +1,10 @@
+## Como Iniciar o Projeto
+npm init -y
+
+## Instalar Dependências
+npm install express cors mysql2 
+ou 
+npm intall express
+
+## Rodar o Servidor
+node server.js
