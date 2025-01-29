@@ -14,7 +14,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "login_db"
+    database: "login_db",
 });
 
 db.connect((err) => {
@@ -31,7 +31,7 @@ app.post("/register", (req, res) => {
 
     // Verificar se username ou password estão vazios
     if (!username || !password) {
-        return res.status(400).json({ message: "Usuário e senha são obrigatórios!" });
+        return res.status(400).json({ message: "Usuário e senha são obrigatórios" });
     }
 
     const sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -51,7 +51,7 @@ app.post("/login", (req, res) => {
     const sql = "SELECT * FROM users WHERE username = ? AND password = ?";
     db.query(sql, [username, password], (err, results) => {
         if (err) {
-            console.error("Erro ao realizar login:", err.message);
+            console.error("Erro ao realizar login", err.message);
             return res.status(500).json({ error: err.message });
         }
         if (results.length > 0) {
@@ -76,5 +76,5 @@ app.get("/users", (req, res) => {
 
 // Inicia o servidor
 app.listen(PORT, () => {
-    console.log('Servidor rodando em http://localhost:${PORT}');
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
